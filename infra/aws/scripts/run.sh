@@ -10,7 +10,7 @@ set +x
 export DEBIAN_FRONTEND=noninteractive
 # Absolute path to this repo
 SCRIPT=$(readlink -f "$0")
-export REPOPATH=$(dirname "$SCRIPT" | sed 's/\/api\/scripts//g')
+export REPOPATH=$(dirname "$SCRIPT" | sed 's/\/infra\/aws\/scripts//g')
 
 # what you can do
 CLEAR=N
