@@ -32,8 +32,7 @@ if __name__ == '__main__':
             Description='This role allows Sagemaker access to other AWS resources on behalf of this account, ie S3'
         )
     except ClientError as error:
-        print('Unexpected error occurred... Role could not be created:', error)
-        return  error
+        return 'Unexpected error occurred... Role could not be created:', error
 
     #attach aws managed policy
     awsmanagedpolicy = 'arn:aws:iam::aws:policy/AmazonSageMakerFullAccess'
