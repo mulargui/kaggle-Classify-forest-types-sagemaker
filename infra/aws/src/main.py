@@ -32,7 +32,8 @@ if __name__ == '__main__':
             Description='This role allows Sagemaker access to other AWS resources on behalf of this account, ie S3'
         )
     except ClientError as error:
-        return 'Unexpected error occurred... Role could not be created:', error
+        print('Unexpected error occurred... Role could not be created:', error)
+        sys.exit(-1)        
 
     #attach aws managed policy
     awsmanagedpolicy = 'arn:aws:iam::aws:policy/AmazonSageMakerFullAccess'
@@ -47,7 +48,8 @@ if __name__ == '__main__':
         client.delete_role(
             RoleName='AmazonSageMaker-ExecutionRole-test'
         )
-        return 'Role could not be created...', error
+        print('Role could not be created:', error)
+        sys.exit(-1)
 
     policy='''{
         "Version": "2012-10-17",
