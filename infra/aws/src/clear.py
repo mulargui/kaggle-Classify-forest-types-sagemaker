@@ -24,7 +24,7 @@ if bucketname:
     #bucket.delete()
 
     # First we list all files
-    response = s3_client.list_objects_v2(Bucket=bucketname, Prefix="/")
+    response = client.list_objects_v2(Bucket=bucketname, Prefix="/")
     print(response)
     files_to_delete = []
     for f in response["Contents"]:
