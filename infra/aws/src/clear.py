@@ -11,7 +11,7 @@ client.detach_role_policy(
     PolicyArn=awsmanagedpolicy
 )
 client.delete_role(RoleName=rolename)
-'''
+
 #remnove S3 bucket
 #find the sagemaker bucket
 client = boto3.client('s3')
@@ -22,7 +22,7 @@ bucketname = [b['Name'] for b in bucketlist['Buckets'] if "sagemaker" in b['Name
 if bucketname:
     boto3.resource('s3').Bucket(bucketname[0]).objects.delete()
     boto3.resource('s3').Bucket(bucketname[0]).delete()
-
+'''
 #remove sagemaker endpoint
  
 print('teared down all aws sagemaker related resources!')
