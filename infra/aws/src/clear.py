@@ -24,6 +24,7 @@ if bucketname:
     #bucket.delete()
 
     # First we list all files
+    print(bucketname)
     response = client.list_objects_v2(Bucket=bucketname)
     print(response)
     files_to_delete = []
