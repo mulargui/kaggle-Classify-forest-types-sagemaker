@@ -14,7 +14,21 @@ client.delete_role(RoleName=rolename)
 
 #remnove S3 bucket
 bucket_name = "sagemaker-us-east-1-867679111813"
- 
+
+# Retrieve the list of existing buckets
+client = boto3.client('s3')
+bucketlist = client.list_buckets()
+bucket = [b for b in bucketlist if "sagemaker" in b['Name']]
+
+if bucket:
+    print(bucket) 
+else
+    print('no bucket')
+sys.exit(0)
+
+
+
+
 # First we list all files in bucket
 client=boto3.client('s3')
 response = client.list_objects_v2(Bucket=bucket_name, Prefix="/")
