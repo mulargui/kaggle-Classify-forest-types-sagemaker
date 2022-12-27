@@ -11,7 +11,7 @@ if __name__ == '__main__':
     role = [r for r in rolelist if "AmazonSageMaker-ExecutionRole" in r['RoleName']][0]['Arn']
 
     #temporary
-    model_url = "s3://sagemaker-us-east-1-867679111813/tensorflow-training-2022-12-20-22-54-39-411/output/model.tar.gz"
+    model_url = "s3://sagemaker-us-east-1-867679111813/tensorflow-training-2022-12-27-02-42-02-440/output/model.tar.gz"
 
     #configuration
     serverless_config = ServerlessInferenceConfig(

@@ -24,5 +24,13 @@ if bucketname:
     boto3.resource('s3').Bucket(bucketname[0]).delete()
 '''
 #remove sagemaker endpoint
- 
+endpointname='predict-forest-type'
+
+client = boto3.client('sagemaker')
+response = client.describe_endpoint_config(EndpointConfigName=endpointname)
+print(response)
+#client.delete_endpoint(EndpointName=endpointname)
+#client.delete_endpoint_config(EndpointConfigName=endpoint_config_name)
+#client.delete_model(ModelName=model_name)
+                        
 print('teared down all aws sagemaker related resources!')
