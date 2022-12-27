@@ -21,19 +21,7 @@ bucketname = [b['Name'] for b in bucketlist['Buckets'] if "sagemaker" in b['Name
 #delete all objects in the bucket and the bucket itself
 if bucketname:
     boto3.resource('s3').Bucket(bucketname[0]).objects.delete()
-    #bucket.delete()
-    '''
-    # First we list all files
-    print(bucketname[0])
-    response = client.list_objects_v2(Bucket=bucketname)
-    print(response)
-    files_to_delete = []
-    for f in response["Contents"]:
-        files_to_delete.append({"Key": f["Key"]})
-    # This will delete all files
-    response = client.delete_objects(
-        Bucket=bucketname, Delete={"Objects": files_to_delete}
-    )'''    
+    boto3.resource('s3').Bucket(bucketname[0]).delete()
 
 #remove sagemaker endpoint
  
