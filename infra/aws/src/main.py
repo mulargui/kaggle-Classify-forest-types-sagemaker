@@ -8,7 +8,7 @@ if __name__ == '__main__':
 
     #check if the role for sagemaker exists
     client=boto3.client('iam')
-    rolelist = client.list_roles(PathPrefix='/service-role/')['Roles']
+    rolelist = client.list_roles(PathPrefix='/')['Roles']
     role = [r for r in rolelist if rolename in r['RoleName']]
 
     if role:
