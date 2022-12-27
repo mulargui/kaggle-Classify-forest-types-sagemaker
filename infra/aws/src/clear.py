@@ -29,8 +29,9 @@ endpointname='predict-forest-type'
 client = boto3.client('sagemaker')
 response = client.describe_endpoint_config(EndpointConfigName=endpointname)
 print(response)
+print(response['ProductionVariants'][0]['ModelName'])
 #client.delete_endpoint(EndpointName=endpointname)
-#client.delete_endpoint_config(EndpointConfigName=endpoint_config_name)
-#client.delete_model(ModelName=model_name)
+#client.delete_endpoint_config(EndpointConfigName=endpointname)
+#client.delete_model(ModelName=response['ProductionVariants'][0]['ModelName'])
                         
 print('teared down all aws sagemaker related resources!')
