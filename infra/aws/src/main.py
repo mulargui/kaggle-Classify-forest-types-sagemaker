@@ -3,10 +3,13 @@ import boto3
 
 if __name__ == '__main__':
 
+    #name of the role to create
+    rolename="AmazonSageMaker-ExecutionRole-test"
+
     #check if the role for sagemaker exists
     client=boto3.client('iam')
     rolelist = client.list_roles(PathPrefix='/service-role/')['Roles']
-    role = [r for r in rolelist if "AmazonSageMaker-ExecutionRole" in r['RoleName']][0]['Arn']
+    role = [r for r in rolelist if rolename in r['RoleName']][0]['Arn']
 
     if role:
         sys.exit(0)
@@ -27,7 +30,7 @@ if __name__ == '__main__':
 
     try:
         role = client.create_role(
-            RoleName='AmazonSageMaker-ExecutionRole-test',
+            RoleName=rolename,
             AssumeRolePolicyDocument=trustpolicy,
             Description='This role allows Sagemaker access to other AWS resources on behalf of this account, ie S3'
         )
@@ -40,17 +43,17 @@ if __name__ == '__main__':
 
     try:
         client.attach_role_policy(
-            RoleName='AmazonSageMaker-ExecutionRole-test',
+            RoleName=rolename,
             PolicyArn=awsmanagedpolicy
         )
     except ClientError as error:
         print('Unexpected error occurred... hence cleaning up')
-        client.delete_role(
-            RoleName='AmazonSageMaker-ExecutionRole-test'
-        )
+        client.delete_role(RoleName=rolename)
         print('Role could not be created:', error)
         sys.exit(-1)
 
+    print('Role created!')
+    
     policy='''{
         "Version": "2012-10-17",
         "Statement": [
