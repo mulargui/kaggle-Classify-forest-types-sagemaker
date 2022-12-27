@@ -9,7 +9,7 @@ if __name__ == '__main__':
     #check if the role for sagemaker exists
     client=boto3.client('iam')
     rolelist = client.list_roles(PathPrefix='/service-role/')['Roles']
-    role = [r for r in rolelist if rolename in r['RoleName']][0]['Arn']
+    role = [r for r in rolelist if rolename in r['RoleName']]
 
     if role:
         sys.exit(0)
@@ -53,7 +53,7 @@ if __name__ == '__main__':
         sys.exit(-1)
 
     print('Role created!')
-    
+
     policy='''{
         "Version": "2012-10-17",
         "Statement": [
