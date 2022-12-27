@@ -4,7 +4,7 @@ import boto3
 if __name__ == '__main__':
 
     #name of the role to create
-    rolename="AmazonSageMaker-ExecutionRole-test"
+    rolename="AmazonSageMaker-ExecutionRole"
 
     #check if the role for sagemaker exists
     client=boto3.client('iam')
