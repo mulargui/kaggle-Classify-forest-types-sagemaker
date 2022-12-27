@@ -22,7 +22,7 @@ bucket = [b for b in bucketlist if "sagemaker" in b['Name']]
 
 if bucket:
     print(bucket) 
-else
+else:
     print('no bucket')
 sys.exit(0)
 
