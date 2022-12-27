@@ -18,7 +18,7 @@ bucket_name = "sagemaker-us-east-1-867679111813"
 # Retrieve the list of existing buckets
 client = boto3.client('s3')
 bucketlist = client.list_buckets()
-bucket = [b for b in bucketlist if "sagemaker" in b['Name']]
+bucket = [b for b in bucketlist['Buckets'] if "sagemaker" in b['Name']]
 
 if bucket:
     print(bucket) 
