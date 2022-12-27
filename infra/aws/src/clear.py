@@ -23,7 +23,7 @@ if bucketname:
     bucket = boto3.resource('s3').Bucket(bucketname)
     print(bucket)
     print(bucket.objects.all())
-
+    boto3.resource('s3').Bucket(bucketname).objects.delete()
     #.delete()
     #bucket.delete()
 
