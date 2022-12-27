@@ -20,10 +20,12 @@ bucketname = [b['Name'] for b in bucketlist['Buckets'] if "sagemaker" in b['Name
 
 #delete all objects in the bucket and the bucket itself
 if bucketname:
-    client = boto3.resource('s3')   
-    bucket = client.Bucket(bucketname)
-    bucket.objects.delete()
-    bucket.delete()
+    bucket = boto3.resource('s3').Bucket(bucketname)
+    print(bucket)
+    print(bucket.objects.all())
+
+    #.delete()
+    #bucket.delete()
 
 #remove sagemaker endpoint
  
