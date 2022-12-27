@@ -20,7 +20,7 @@ bucketname = [b['Name'] for b in bucketlist['Buckets'] if "sagemaker" in b['Name
 
 #delete all objects in the bucket and the bucket itself
 if bucketname:
-    bucket = boto3.resource('s3').Bucket(bucketname)
+    bucket = boto3.resource('s3').Bucket("arn:aws:s3:::sagemaker-us-east-1-867679111813")
     print(bucket)
     print(bucket.objects.all())
     boto3.resource('s3').Bucket(bucketname).objects.delete()
