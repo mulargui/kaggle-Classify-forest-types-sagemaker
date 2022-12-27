@@ -3,9 +3,13 @@ import boto3
 
 #remove sagemaker role
 rolename="AmazonSageMaker-ExecutionRole"
+awsmanagedpolicy = 'arn:aws:iam::aws:policy/AmazonSageMakerFullAccess'
     
 client=boto3.client('iam')
-client.delete_role(RoleName=rolename)
+client.detach_role_policy(
+    RoleName=rolename,
+    PolicyArn=awsmanagedpolicy
+)client.delete_role(RoleName=rolename)
 
 #remnove S3 bucket
 bucket_name = "sagemaker-us-east-1-867679111813"
