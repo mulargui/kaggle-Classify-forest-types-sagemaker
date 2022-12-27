@@ -15,22 +15,21 @@ client.delete_role(RoleName=rolename)
 #remnove S3 bucket
 bucket_name = "sagemaker-us-east-1-867679111813"
 
-# Retrieve the list of existing buckets
-client = boto3.client('s3')
+#find the sagemaker bucket
+client = boto3.resource('s3')
 bucketlist = client.list_buckets()
 bucket = [b['Name'] for b in bucketlist['Buckets'] if "sagemaker" in b['Name']]
-
-#delete all objects in the bucket
+print (bucket)
+'''
+#delete all objects in the bucket and the bucket
 if bucket:
-    response = client.list_objects_v2(Bucket=bucket, Prefix="/")
-    files_in_folder = response["Contents"]
-    files_to_delete = []
-    # We will create Key array to pass to delete_objects function
-    for f in files_in_folder:
-        files_to_delete.append({"Key": f["Key"]})
-    client.delete_objects(
-        Bucket=bucket, Delete={"Objects": files_to_delete}
-    )
+    client = boto3.resource('s3')   
+    bucket = client.Bucket(bucket)
+    bucket.objects.all().delete()
+
+'''
+
+
 
 #remove sagemaker endpoint
  
