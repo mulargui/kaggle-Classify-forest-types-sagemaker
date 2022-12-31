@@ -18,7 +18,7 @@ if __name__ == '__main__':
     result = boto3.client('s3').list_objects_v2(Bucket=bucket, Prefix='', Delimiter='/')['CommonPrefixes']
     folderlist = [r['Prefix'] for r in result]
     print(folderlist)
-    print(sorted(folderlist))
+    print(sorted(folderlist, reverse=True))
     sys.exit(0)
 
     #configuration
