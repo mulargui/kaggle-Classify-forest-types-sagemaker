@@ -17,8 +17,8 @@ if __name__ == '__main__':
     bucket = sagemaker.Session().default_bucket() 
     result = boto3.client('s3').list_objects_v2(Bucket=bucket, Prefix='', Delimiter='/')['CommonPrefixes']
     folderlist = [r['Prefix'] for r in result]
-    print(folderlist)
-    print(sorted(folderlist, reverse=True)[0])
+    folder = sorted(folderlist, reverse=True)[0]
+    print('s3://' + bucket + '/' + folder + '/output/model.tar.gz')
     sys.exit(0)
 
     #configuration
