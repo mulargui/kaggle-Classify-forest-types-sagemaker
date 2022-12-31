@@ -12,14 +12,13 @@ if __name__ == '__main__':
     role = [r for r in rolelist if "AmazonSageMaker-ExecutionRole" in r['RoleName']][0]['Arn']
 
     #temporary
-    model_url = "s3://sagemaker-us-east-1-867679111813/tensorflow-training-2022-12-27-02-42-02-440/output/model.tar.gz"
+    #model_url = "s3://sagemaker-us-east-1-867679111813/tensorflow-training-2022-12-27-02-42-02-440/output/model.tar.gz"
 
     bucket = sagemaker.Session().default_bucket() 
     result = boto3.client('s3').list_objects_v2(Bucket=bucket, Prefix='', Delimiter='/')['CommonPrefixes']
     folderlist = [r['Prefix'] for r in result]
-    folder = sorted(folderlist, reverse=True)[0]
-    print('s3://' + bucket + '/' + folder + '/output/model.tar.gz')
-    sys.exit(0)
+    lastmodel = sorted(folderlist, reverse=True)[0]
+    model_url = 's3://' + bucket + '/' + lastmodel + 'output/model.tar.gz'
 
     #configuration
     serverless_config = ServerlessInferenceConfig(
