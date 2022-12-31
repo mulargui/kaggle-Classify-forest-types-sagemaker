@@ -17,7 +17,7 @@ if __name__ == '__main__':
     bucket = sagemaker.Session().default_bucket() 
     print(bucket)
     #conn = boto3.client('s3').get_bucket(bucket)
-    folderlist = boto3.client('s3').get_bucket(bucket).list("","/")
+    folderlist = boto3.client('s3').list_objects_v2(Bucket=bucket, Prefix='', Delimiter='/')
     for folder in folderlist:
         print(folder)
     sys.exit(0)
