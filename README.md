@@ -20,7 +20,7 @@ Directories:\
 /model/src/trainsg.py creates and runs the job in Sagemaker to build the model.\
 **/data** contains the data used for training the model. It is a copy of the original train data. \
 **/model-registry** is a place to store and retrieve the parameters of the model when using local mode. \
-**/infra** is the place for all the infrastructure needed to have the model in Prod. At this time there is just a pipeline folder with a shell script to build and deploy the service. There are also scripts to setup and remove AWS resources.
+**/infra** is the place for all the infrastructure needed to have the model in Prod. At this time there is just a pipeline folder with a shell script to build and deploy the service. There are also scripts to setup and remove AWS resources.\
 /infra/pipeline/awsparams.sh declares all the AWS secrets needed to access AWS. Use awsparams-template.sh to build it.
 
 Here are some ideas to sophisticate this service
