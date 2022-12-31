@@ -15,8 +15,9 @@ if __name__ == '__main__':
     model_url = "s3://sagemaker-us-east-1-867679111813/tensorflow-training-2022-12-27-02-42-02-440/output/model.tar.gz"
 
     bucket = sagemaker.Session().default_bucket() 
+    print(bucket)
     #conn = boto3.client('s3').get_bucket(bucket)
-    folderlist = bucket.list("","/")
+    folderlist = boto3.client('s3').get_bucket(bucket).list("","/")
     for folder in folderlist:
         print(folder)
     sys.exit(0)
