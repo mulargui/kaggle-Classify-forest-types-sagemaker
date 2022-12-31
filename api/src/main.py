@@ -1,3 +1,4 @@
+import sys
 import boto3
 import sagemaker
 from sagemaker.tensorflow import TensorFlowModel
@@ -12,6 +13,13 @@ if __name__ == '__main__':
 
     #temporary
     model_url = "s3://sagemaker-us-east-1-867679111813/tensorflow-training-2022-12-27-02-42-02-440/output/model.tar.gz"
+
+    bucket = sagemaker.Session().default_bucket() 
+    #conn = boto3.client('s3').get_bucket(bucket)
+    folderlist = bucket.list("","/")
+    for folder in folderlist:
+        print(folder)
+    sys.exit(0)
 
     #configuration
     serverless_config = ServerlessInferenceConfig(
