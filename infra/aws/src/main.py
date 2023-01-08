@@ -1,8 +1,11 @@
 import sys
 import boto3
-from modules.iam import Role
+#from modules.iam import Role
 
 if __name__ == '__main__':
 
-    role = Role()
+    for path in sys.path:
+        print(path)
+
+    #role = Role()
     print('Role created!')
