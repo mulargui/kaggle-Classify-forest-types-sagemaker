@@ -1,6 +1,6 @@
 import sys
 import boto3
-from ....aws.modules.iam import Role
+from aws.modules.iam import Role
 
 if __name__ == '__main__':
 
