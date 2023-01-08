@@ -1,55 +1,8 @@
 import sys
 import boto3
+from ...aws.modules.iam import Role
 
 if __name__ == '__main__':
 
-    #name of the role to create
-    rolename="AmazonSageMaker-ExecutionRole"
-
-    #check if the role for sagemaker exists
-    client=boto3.client('iam')
-    rolelist = client.list_roles(PathPrefix='/')['Roles']
-    role = [r for r in rolelist if rolename in r['RoleName']]
-
-    if role:
-        sys.exit(0)
-
-    #create the role
-    trustpolicy='''{
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Principal": {
-                    "Service": "sagemaker.amazonaws.com"
-                },
-                "Action": "sts:AssumeRole"
-            }
-        ]
-    }'''
-
-    try:
-        role = client.create_role(
-            RoleName=rolename,
-            AssumeRolePolicyDocument=trustpolicy,
-            Description='This role allows Sagemaker access to other AWS resources on behalf of this account, ie S3'
-        )
-    except ClientError as error:
-        print('Unexpected error occurred... Role could not be created:', error)
-        sys.exit(-1)        
-
-    #attach aws managed policy
-    awsmanagedpolicy = 'arn:aws:iam::aws:policy/AmazonSageMakerFullAccess'
-
-    try:
-        client.attach_role_policy(
-            RoleName=rolename,
-            PolicyArn=awsmanagedpolicy
-        )
-    except ClientError as error:
-        print('Unexpected error occurred... hence cleaning up')
-        client.delete_role(RoleName=rolename)
-        print('Role could not be created:', error)
-        sys.exit(-1)
-
+    role = Role()
     print('Role created!')
