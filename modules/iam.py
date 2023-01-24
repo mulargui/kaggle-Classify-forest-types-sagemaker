@@ -20,8 +20,8 @@ class Role:
         ]
     }'''
 
-    #constructor
-    def __init__(self):
+    #create sagemaker role
+    def create(self):
 
         #check if the role for sagemaker exists
         client=boto3.client('iam')
@@ -31,7 +31,7 @@ class Role:
         if role:
             print('role exists')
             print(role)
-            return
+            return 1
 
         #otherwise create the role
         try:
@@ -42,7 +42,7 @@ class Role:
             )
         except ClientError as error:
             print('Unexpected error occurred... Role could not be created:', error)
-            return        
+            return 0        
 
         #attach aws managed policy
         try:
@@ -54,4 +54,18 @@ class Role:
             print('Unexpected error occurred... hence cleaning up')
             client.delete_role(RoleName=self.rolename)
             print('Role could not be created:', error)
-            return
+            return 0
+        
+        return 1
+
+    #remove sagemaker role
+    def remove(self):
+
+        client=boto3.client('iam')
+        client.detach_role_policy(
+            RoleName=rolename,
+            PolicyArn=awsmanagedpolicy
+        )
+        client.delete_role(RoleName=rolename)
+
+        return 1
