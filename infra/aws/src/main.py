@@ -1,6 +1,6 @@
 import sys
 import boto3
-from iam import AWSRole
+from infra.aws.pckgs.iam import AWSRole
 
 if __name__ == '__main__':
 

@@ -1,8 +1,8 @@
 import sys
 import boto3
-from iam import AWSRole
-from s3 import AWSS3
-from sagemaker import AWSSageMaker
+from infra.aws.pckgs.iam import AWSRole
+from infra.aws.pckgs.s3 import AWSS3
+from infra.aws.pckgs.sagemaker import AWSSageMaker
 
 if __name__ == '__main__':
 
