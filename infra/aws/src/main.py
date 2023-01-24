@@ -10,6 +10,7 @@ if __name__ == '__main__':
     for path in sys.path:
         print(path)
 
+    sys.path.insert(1, '/repo')
     from modules.iam import Role
 
     role = Role()
