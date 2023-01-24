@@ -63,9 +63,9 @@ class Role:
 
         client=boto3.client('iam')
         client.detach_role_policy(
-            RoleName=rolename,
-            PolicyArn=awsmanagedpolicy
+            RoleName=self.rolename,
+            PolicyArn=self.awsmanagedpolicy
         )
-        client.delete_role(RoleName=rolename)
+        client.delete_role(RoleName=self.rolename)
 
         return 1
