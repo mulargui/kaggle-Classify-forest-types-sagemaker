@@ -10,7 +10,7 @@ if __name__ == '__main__':
     for path in sys.path:
         print(path)
 
-    from .repo.modules.iam import Role
+    from modules.iam import Role
 
     role = Role()
     print('Role created!')
