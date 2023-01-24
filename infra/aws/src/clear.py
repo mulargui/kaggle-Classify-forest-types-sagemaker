@@ -1,32 +1,24 @@
 import sys
 import boto3
-from modules.iam import Role
+from iam import AWSRole
+from s3 import AWSS3
+from sagemaker import AWSSageMaker
 
 if __name__ == '__main__':
 
     #remove sagemaker role
-    role = Role()
+    role = AWSRole()
     if role.remove():
         print('Role removed!')
 
     #remnove S3 bucket
-    #find the sagemaker bucket
-    client = boto3.client('s3')
-    bucketlist = client.list_buckets()
-    bucketname = [b['Name'] for b in bucketlist['Buckets'] if "sagemaker" in b['Name']]
+    bucket = AWSS3()
+    if bucket.remove():
+        print('bucket removed!')
 
-    #delete all objects in the bucket and the bucket itself
-    if bucketname:
-        boto3.resource('s3').Bucket(bucketname[0]).objects.delete()
-        boto3.resource('s3').Bucket(bucketname[0]).delete()
-
-    #remove sagemaker endpoint
-    endpointname='predict-forest-type'
-
-    client = boto3.client('sagemaker')
-    response = client.describe_endpoint_config(EndpointConfigName=endpointname)
-    client.delete_endpoint(EndpointName=endpointname)
-    client.delete_endpoint_config(EndpointConfigName=endpointname)
-    client.delete_model(ModelName=response['ProductionVariants'][0]['ModelName'])
+    #remnove sagemaker resources
+    sg = AWSSageMaker()
+    if sg.remove():
+        print('sagemaker removed!')
                             
-    print('teared down all aws sagemaker related resources!')
+    print('teared down all AWS related resources!')

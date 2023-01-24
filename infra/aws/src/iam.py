@@ -1,7 +1,7 @@
 import boto3
 
-class Role:
-    #name of the role to create
+class AWSRole:
+    #name of the role
     rolename="AmazonSageMaker-ExecutionRole"
 
     #aws managed policy
@@ -30,7 +30,6 @@ class Role:
 
         if role:
             print('role exists')
-            print(role)
             return 1
 
         #otherwise create the role
