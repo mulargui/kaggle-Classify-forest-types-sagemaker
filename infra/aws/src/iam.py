@@ -68,5 +68,7 @@ class AWSRole:
                 PolicyArn=self.awsmanagedpolicy
             )
             client.delete_role(RoleName=self.rolename)
-
+        except Exception: 
+            pass
+        
         return 1
