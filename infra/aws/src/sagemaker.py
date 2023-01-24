@@ -16,8 +16,8 @@ class AWSSageMaker:
             client.delete_endpoint_config(EndpointConfigName=self.endpointname)
 
             client.delete_model(ModelName=response['ProductionVariants'][0]['ModelName'])
-        except ClientError as error:
-            print('No sagemaker resources...')
+        except Exception: 
+            pass
 
         return 1
  
